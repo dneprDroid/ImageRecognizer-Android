@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".MainActivity">
+
+    <FrameLayout
+            android:id="@+id/flImageBlock"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/ivCamera"
+            android:layout_alignParentTop="true">
+
+        <android.imagerecognizer.app.ui.views.PaintView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+    </FrameLayout>
+
+    <ImageView
+            android:id="@+id/ivCamera"
+            android:src="@android:drawable/ic_menu_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/flImageBlock"
+            android:layout_alignEnd="@+id/flImageBlock"/>
+
+    <ImageView
+            android:id="@+id/ivGallery"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small"
+            android:layout_below="@+id/flImageBlock"
+            android:layout_toLeftOf="@+id/ivCamera"
+            android:layout_toStartOf="@+id/ivCamera"/>
+
+    <android.imagerecognizer.app.ui.views.WhatisButton
+            android:id="@+id/btnWhatis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ivGallery"
+            android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
