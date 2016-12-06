@@ -2,4 +2,6 @@
 .gitignore
 .idea/workspace.xml
 app/src/main/res/drawable/
-/.idea/
+.idea/
+build/
+.gradle/
