@@ -49,7 +49,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void requestPermission(PermissionCallback permissionCallback) {
         final String permission = permissionCallback.getPermissionName();// Manifest.permission.CAMERA;
-        this.permissionCallback = permissionCallback;
 
         if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
 
@@ -57,6 +56,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 permissionCallback.onFailGrant();
             } else {
                 // Handle the result in Activity#onRequestPermissionResult(int, String[], int[])
+                this.permissionCallback = permissionCallback;
                 ActivityCompat.requestPermissions(this, new String[]{permission}, REQUEST_PERMISSION);
             }
         } else {
