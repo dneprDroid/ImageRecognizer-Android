@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.desmond.squarecamera.CameraActivity;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -64,7 +65,14 @@ public class MainActivity extends BaseActivity {
         requestPermission(new PermissionCallback() {
             @Override
             public void onPermissionGranted() {
-
+                Intent startCustomCameraIntent = new Intent(MainActivity.this, CameraActivity.class);
+                startActivityForResult(startCustomCameraIntent, new Callback() {
+                    @Override
+                    public void onCallback(@NonNull Intent data) {
+                        Uri photoUri = data.getData();
+                        Bitmap bitmap = BitmapFactory.decodeFile(photoUri.getPath());
+                    }
+                });
             }
 
             @Override
