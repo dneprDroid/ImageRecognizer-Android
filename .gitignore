@@ -1,7 +1,5 @@
-/build
+
 .gitignore
-.idea/workspace.xml
-app/src/main/res/drawable/
 .idea/
 build/
 .gradle/
