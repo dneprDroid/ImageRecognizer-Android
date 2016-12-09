@@ -7,6 +7,7 @@ import neural.imagerecognizer.app.util.Tool;
 import org.dmlc.mxnet.Predictor;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class RecognitionApp extends Application {
 
     public static String getName(int i) {
         if (i >= dict.size()) {
-            return "Shit";
+            return instance.getString(R.string.text_image_not_recognized);
         }
         return dict.get(i);
     }
