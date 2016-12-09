@@ -16,8 +16,6 @@ public class PaintView extends ImageView {
     private Canvas mCanvas;
     private Path mPath;
     private Paint mBitmapPaint;
-    private Paint circlePaint;
-    private Path circlePath;
     private Paint mPaint;
 
     public PaintView(Context c) {
@@ -43,13 +41,6 @@ public class PaintView extends ImageView {
 
         mPath = new Path();
         mBitmapPaint = new Paint(Paint.DITHER_FLAG);
-        circlePaint = new Paint();
-        circlePath = new Path();
-        circlePaint.setAntiAlias(true);
-        circlePaint.setColor(Color.BLUE);
-        circlePaint.setStyle(Paint.Style.STROKE);
-        circlePaint.setStrokeJoin(Paint.Join.MITER);
-        circlePaint.setStrokeWidth(4f);
     }
 
     @Override
@@ -66,7 +57,6 @@ public class PaintView extends ImageView {
 
         canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
         canvas.drawPath(mPath, mPaint);
-        canvas.drawPath(circlePath, circlePaint);
     }
 
     private float mX, mY;
@@ -86,15 +76,11 @@ public class PaintView extends ImageView {
             mPath.quadTo(mX, mY, (x + mX) / 2, (y + mY) / 2);
             mX = x;
             mY = y;
-
-            circlePath.reset();
-            circlePath.addCircle(mX, mY, 30, Path.Direction.CW);
         }
     }
 
     private void touch_up() {
         mPath.lineTo(mX, mY);
-        circlePath.reset();
         // commit the path to our offscreen
         mCanvas.drawPath(mPath, mPaint);
         // kill this so we don't double draw
