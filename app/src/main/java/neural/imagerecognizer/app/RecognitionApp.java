@@ -41,7 +41,7 @@ public class RecognitionApp extends Application {
 
         instance = this;
         tm = ThreadManager.getInstance();
-        //Thread.setDefaultUncaughtExceptionHandler(new AppUncaughtExceptionHandler(this));
+        Thread.setDefaultUncaughtExceptionHandler(new AppUncaughtExceptionHandler(this));
 
         initMxNet();
     }

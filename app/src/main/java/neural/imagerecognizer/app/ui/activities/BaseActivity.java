@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    public static final int REQUEST_PERMISSION = 100;
+    private static final int REQUEST_PERMISSION = 100;
 
     private static final int REQUEST_CODE = 101;
 

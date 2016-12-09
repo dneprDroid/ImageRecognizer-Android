@@ -3,17 +3,10 @@ package neural.imagerecognizer.app.ui.views;
 import android.animation.*;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.TransitionDrawable;
-import android.support.annotation.StringRes;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import neural.imagerecognizer.app.R;
-import neural.imagerecognizer.app.RecognitionApp;
-import neural.imagerecognizer.app.util.Tool;
 
 public class WhatisButton extends Button {
     private static final long ANIMATION_DURATION = 1000;

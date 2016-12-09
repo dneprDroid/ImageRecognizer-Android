@@ -3,9 +3,11 @@ package neural.imagerecognizer.app.util;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.util.Log;
 import android.widget.Toast;
@@ -110,5 +112,19 @@ public final class Tool {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void shareText(Context context, @NonNull String str) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, str);
+        sendIntent.setType("text/plain");
+        context.startActivity(sendIntent);
+    }
+
+    public static String generateGooglePlayLink() {
+
+        return String.format("https://play.google.com/store/apps/details?id=%s",
+                RecognitionApp.getInstance().getPackageName());
     }
 }
