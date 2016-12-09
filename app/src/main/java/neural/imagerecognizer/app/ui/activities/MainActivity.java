@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import neural.imagerecognizer.app.R;
+import neural.imagerecognizer.app.ui.views.PaintView;
 import neural.imagerecognizer.app.ui.views.WhatisButton;
 import neural.imagerecognizer.app.util.Tool;
 import android.net.Uri;
@@ -23,6 +24,9 @@ public class MainActivity extends BaseActivity {
 
     @Bind(R.id.btnWhatis)
     WhatisButton btnWhatis;
+
+    @Bind(R.id.paintView)
+    PaintView paintView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +48,7 @@ public class MainActivity extends BaseActivity {
         startActivityForResult(photoPickerIntent, new CallbackResult() {
             @Override
             public void onResult(@NonNull Intent data) {
-                try {
-                    Uri imageUri = data.getData();
-                    InputStream imageStream = getContentResolver().openInputStream(imageUri);
-
-                    Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                setImageFromIntent(data);
             }
 
         });
@@ -66,8 +63,7 @@ public class MainActivity extends BaseActivity {
                 startActivityForResult(startCustomCameraIntent, new CallbackResult() {
                     @Override
                     public void onResult(@NonNull Intent data) {
-                        Uri photoUri = data.getData();
-                        Bitmap bitmap = BitmapFactory.decodeFile(photoUri.getPath());
+                        setImageFromIntent(data);
                     }
                 });
             }
@@ -83,6 +79,18 @@ public class MainActivity extends BaseActivity {
                 return Manifest.permission.CAMERA;
             }
         });
+    }
+
+    private void setImageFromIntent(Intent data) {
+        try {
+            Uri imageUri = data.getData();
+            InputStream imageStream = getContentResolver().openInputStream(imageUri);
+
+            Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
+            paintView.setPhoto(bitmap);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

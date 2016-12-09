@@ -6,17 +6,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.ImageView;
 
 public class PaintView extends ImageView {
-    public int width;
-    public int height;
+    private int width;
+    private int height;
     private Bitmap mBitmap;
     private Canvas mCanvas;
     private Path mPath;
     private Paint mBitmapPaint;
     private Paint mPaint;
+    private Mode mode = Mode.PAINT;
 
     public PaintView(Context c) {
         super(c);
@@ -79,6 +79,30 @@ public class PaintView extends ImageView {
         }
     }
 
+    @Override
+    public void setImageBitmap(Bitmap bm) {
+        invalidate();
+        super.setImageBitmap(bm);
+    }
+
+    public void setPhoto(Bitmap bitmap) {
+        setModePhoto();
+        setImageBitmap(bitmap);
+    }
+
+    public void clearBitmap() {
+        setImageBitmap(null);
+        invalidate();
+    }
+
+    private void setModePaint() {
+        mode = Mode.PAINT;
+    }
+
+    private void setModePhoto() {
+        this.mode = Mode.PHOTO;
+    }
+
     private void touch_up() {
         mPath.lineTo(mX, mY);
         // commit the path to our offscreen
@@ -89,6 +113,8 @@ public class PaintView extends ImageView {
 
     @Override
     public boolean onTouchEvent(@NonNull MotionEvent event) {
+        if (isModeImage())
+            return true;
         float x = event.getX();
         float y = event.getY();
 
@@ -107,5 +133,17 @@ public class PaintView extends ImageView {
                 break;
         }
         return true;
+    }
+
+    private boolean isModeImage() {
+        return mode == Mode.PHOTO;
+    }
+
+    public Mode getMode() {
+        return mode;
+    }
+
+    public enum Mode {
+        PAINT, PHOTO
     }
 }
