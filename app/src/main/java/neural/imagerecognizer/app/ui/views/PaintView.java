@@ -93,7 +93,7 @@ public class PaintView extends ImageView {
 
     public void setModePaint() {
         setImageBitmap(null);
-        invalidate();
+        clearBitmap();
         mode = Mode.PAINT;
     }
 

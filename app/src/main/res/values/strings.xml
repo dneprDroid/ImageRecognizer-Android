@@ -6,5 +6,5 @@
     <string name="label_recognizing"><i>Recognizing…</i></string>
     <string name="toast_recognition_error">Recognition error!</string>
     <string name="text_image_not_recognized">Shit</string>
-    <string name="action_share">Share</string>
+    <string name="action_share">Tell friends</string>
 </resources>
