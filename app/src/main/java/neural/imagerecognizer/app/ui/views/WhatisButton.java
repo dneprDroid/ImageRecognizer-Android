@@ -60,44 +60,16 @@ public class WhatisButton extends Button {
     }
 
     public void startAnimation() {
-        setTextWithAnimation(R.string.label_recognizing);
+        setText(R.string.label_recognizing);
         animator.start();
         setClickable(false);
         setFocusable(false);
-        setTextColor(Color.GRAY);
-    }
-
-    private void setTextWithAnimation(@StringRes final int labelId) {
-        String newLabel = getContext().getString(labelId);
-        int newWidth = newLabel.length();
-        int oldWidth = getText() == null ? 0 : getText().length();
-
-        ViewCompat.animate(this)
-                .scaleX((float) newWidth / oldWidth)
-                .setDuration(300)
-                .setListener(new ViewPropertyAnimatorListener() {
-                    @Override
-                    public void onAnimationStart(View view) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(View view) {
-                        setText(labelId);
-                    }
-
-                    @Override
-                    public void onAnimationCancel(View view) {
-
-                    }
-                }).start();
     }
 
     public void endAnimation() {
-        setTextWithAnimation(R.string.label_whatis);
+        setText(R.string.label_whatis);
         animator.end();
         setClickable(true);
         setFocusable(true);
-        setTextColor(Color.WHITE);
     }
 }

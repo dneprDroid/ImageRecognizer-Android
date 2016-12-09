@@ -1,22 +1,12 @@
 package neural.imagerecognizer.app;
 
 import android.app.Application;
-import android.content.Context;
-
-import android.support.annotation.Nullable;
 import neural.imagerecognizer.app.util.AppUncaughtExceptionHandler;
 import neural.imagerecognizer.app.util.ThreadManager;
 import neural.imagerecognizer.app.util.Tool;
 import org.dmlc.mxnet.Predictor;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +40,7 @@ public class RecognitionApp extends Application {
 
         instance = this;
         tm = ThreadManager.getInstance();
-        Thread.setDefaultUncaughtExceptionHandler(new AppUncaughtExceptionHandler(this));
+        //Thread.setDefaultUncaughtExceptionHandler(new AppUncaughtExceptionHandler(this));
 
         initMxNet();
     }

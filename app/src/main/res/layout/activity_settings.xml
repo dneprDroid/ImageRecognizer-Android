@@ -6,7 +6,7 @@
                 tools:context=".MainActivity">
 
 
-    <neural.imagerecognizer.app.ui.views.PaintView
+    <View
             android:id="@+id/paintView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
@@ -45,7 +45,7 @@
             android:layout_toEndOf="@+id/ivCamera"
             android:layout_alignTop="@+id/frameLayout"/>
 
-    <neural.imagerecognizer.app.ui.views.WhatisButton
+    <Button
             android:id="@+id/btnWhatis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

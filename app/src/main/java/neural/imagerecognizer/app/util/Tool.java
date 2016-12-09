@@ -51,7 +51,7 @@ public final class Tool {
         showToast(context, message);
     }
 
-    private static void runOnMainThread(Runnable runnable) {
+    public static void runOnMainThread(Runnable runnable) {
         new Handler(Looper.getMainLooper()).post(runnable);
     }
     public static byte[] readRawFile(Context ctx, int resId) {

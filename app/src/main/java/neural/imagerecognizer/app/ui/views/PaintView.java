@@ -91,16 +91,14 @@ public class PaintView extends ImageView {
         setImageBitmap(bitmap);
     }
 
-    public void clearBitmap() {
+
+    public void setModePaint() {
         setImageBitmap(null);
         invalidate();
-    }
-
-    private void setModePaint() {
         mode = Mode.PAINT;
     }
 
-    private void setModePhoto() {
+    public void setModePhoto() {
         this.mode = Mode.PHOTO;
     }
 

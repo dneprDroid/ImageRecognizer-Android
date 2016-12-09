@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">ImageRecognizer</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="label_whatis">What is</string>
-    <string name="label_recognizing">Recognizing…</string>
+    <string name="label_recognizing"><i>Recognizing…</i></string>
     <string name="toast_recognition_error">Recognition error!</string>
 </resources>

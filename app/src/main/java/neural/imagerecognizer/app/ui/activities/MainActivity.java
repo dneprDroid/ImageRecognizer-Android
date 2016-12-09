@@ -9,6 +9,7 @@ import neural.imagerecognizer.app.R;
 import neural.imagerecognizer.app.ui.views.PaintView;
 import neural.imagerecognizer.app.ui.views.WhatisButton;
 import neural.imagerecognizer.app.util.MxNetUtils;
+import neural.imagerecognizer.app.util.ToastImageDescription;
 import neural.imagerecognizer.app.util.Tool;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -44,8 +45,7 @@ public class MainActivity extends BaseActivity {
     public void whatisClick() {
 
         if (paintView.isModePaint()) {
-            if (recognBitmap == null)
-                recognBitmap = paintView.getBitmap();
+            recognBitmap = paintView.getBitmap();
         } else if (paintView.isModePhoto())
             if (recognBitmap == null)
                 return;
@@ -55,10 +55,16 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onResult(@NonNull String description) {
                 btnWhatis.endAnimation();
-                //set description....
+                //set image description....
+                ToastImageDescription.show(MainActivity.this, description);
             }
         });
 
+    }
+
+    @OnClick(R.id.ivPencil)
+    public void enablePaintMode() {
+        paintView.setModePaint();
     }
 
     @OnClick(R.id.ivGallery)

@@ -16,13 +16,17 @@ public final class MxNetUtils {
     private MxNetUtils() {
     }
 
+    static final int SHORTER_SIDE = 256;
+    static final int DESIRED_SIDE = 224;
+
     public static void identifyImage(final Bitmap bitmap, final Callback callback) {
         RecognitionApp.tm.execute(new ThreadManager.Executor<String>() {
             @Nullable
             @Override
             public String onExecute() throws Exception {
-                ByteBuffer byteBuffer = ByteBuffer.allocate(bitmap.getByteCount());
-                bitmap.copyPixelsToBuffer(byteBuffer);
+                Bitmap processedBitmap = processBitmap(bitmap);
+                ByteBuffer byteBuffer = ByteBuffer.allocate(processedBitmap.getByteCount());
+                processedBitmap.copyPixelsToBuffer(byteBuffer);
                 byte[] bytes = byteBuffer.array();
                 float[] colors = new float[bytes.length / 4 * 3];
 
@@ -61,6 +65,24 @@ public final class MxNetUtils {
                 Tool.showToast(R.string.toast_recognition_error);
             }
         });
+    }
+
+    private static Bitmap processBitmap(final Bitmap origin) {
+        //TODO: error handling
+        final int originWidth = origin.getWidth();
+        final int originHeight = origin.getHeight();
+        int height = SHORTER_SIDE;
+        int width = SHORTER_SIDE;
+        if (originWidth < originHeight) {
+            height = (int) ((float) originHeight / originWidth * width);
+        } else {
+            width = (int) ((float) originWidth / originHeight * height);
+        }
+        final Bitmap scaled = Bitmap.createScaledBitmap(origin, width, height, false);
+        int y = (height - DESIRED_SIDE) / 2;
+        int x = (width - DESIRED_SIDE) / 2;
+        return Bitmap.createBitmap(scaled, x, y, DESIRED_SIDE, DESIRED_SIDE);
+
     }
 
     public interface Callback {
