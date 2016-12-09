@@ -5,6 +5,7 @@
 
     <application
             tools:replace="android:theme"
+            android:name="neural.imagerecognizer.app.RecognitionApp"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"

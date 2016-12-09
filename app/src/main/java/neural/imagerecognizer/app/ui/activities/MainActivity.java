@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import neural.imagerecognizer.app.R;
 import neural.imagerecognizer.app.ui.views.PaintView;
 import neural.imagerecognizer.app.ui.views.WhatisButton;
+import neural.imagerecognizer.app.util.MxNetUtils;
 import neural.imagerecognizer.app.util.Tool;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -42,6 +43,13 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.btnWhatis)
     public void whatisClick() {
         btnWhatis.startAnimation();
+
+        MxNetUtils.identifyImage(recognBitmap, new MxNetUtils.Callback() {
+            @Override
+            public void onResult(@NonNull String description) {
+                btnWhatis.endAnimation();
+            }
+        });
 
     }
 
