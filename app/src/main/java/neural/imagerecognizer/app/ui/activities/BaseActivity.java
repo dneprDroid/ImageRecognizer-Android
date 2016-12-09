@@ -53,7 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
-                permissionCallback.onFailGrant();
+                permissionCallback.onFail();
             } else {
                 // Handle the result in Activity#onRequestPermissionResult(int, String[], int[])
                 this.permissionCallback = permissionCallback;
@@ -78,7 +78,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 if (granted)
                     permissionCallback.onPermissionGranted();
                 else
-                    permissionCallback.onFailGrant();
+                    permissionCallback.onFail();
                 break;
             }
         }
@@ -100,7 +100,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public interface PermissionCallback {
         void onPermissionGranted();
 
-        void onFailGrant();
+        void onFail();
 
         @NonNull
         String getPermissionName();

@@ -5,10 +5,14 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.TransitionDrawable;
+import android.support.annotation.StringRes;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import neural.imagerecognizer.app.R;
+import neural.imagerecognizer.app.RecognitionApp;
 import neural.imagerecognizer.app.util.Tool;
 
 public class WhatisButton extends Button {
@@ -56,15 +60,41 @@ public class WhatisButton extends Button {
     }
 
     public void startAnimation() {
-        setText(R.string.label_recognizing);
+        setTextWithAnimation(R.string.label_recognizing);
         animator.start();
         setClickable(false);
         setFocusable(false);
         setTextColor(Color.GRAY);
     }
 
+    private void setTextWithAnimation(@StringRes final int labelId) {
+        String newLabel = getContext().getString(labelId);
+        int newWidth = newLabel.length();
+        int oldWidth = getText() == null ? 0 : getText().length();
+
+        ViewCompat.animate(this)
+                .scaleX((float) newWidth / oldWidth)
+                .setDuration(300)
+                .setListener(new ViewPropertyAnimatorListener() {
+                    @Override
+                    public void onAnimationStart(View view) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(View view) {
+                        setText(labelId);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(View view) {
+
+                    }
+                }).start();
+    }
+
     public void endAnimation() {
-        setText(R.string.label_whatis);
+        setTextWithAnimation(R.string.label_whatis);
         animator.end();
         setClickable(true);
         setFocusable(true);

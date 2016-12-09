@@ -6,6 +6,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import neural.imagerecognizer.app.util.AppUncaughtExceptionHandler;
 import neural.imagerecognizer.app.util.ThreadManager;
+import neural.imagerecognizer.app.util.Tool;
 import org.dmlc.mxnet.Predictor;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,6 +24,7 @@ import java.util.Map;
 public class RecognitionApp extends Application {
     private static Predictor predictor;
     public static ThreadManager tm;
+    private static RecognitionApp instance;
 
     public static Predictor getPredictor() {
         return predictor;
@@ -45,12 +47,18 @@ public class RecognitionApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        instance = this;
         tm = ThreadManager.getInstance();
         Thread.setDefaultUncaughtExceptionHandler(new AppUncaughtExceptionHandler(this));
 
+        initMxNet();
+    }
 
-        final byte[] symbol = readRawFile(this, R.raw.symbol);
-        final byte[] params = readRawFile(this, R.raw.params);
+    private void initMxNet() {
+        final byte[] symbol = Tool.readRawFile(this, R.raw.symbol);
+        final byte[] params = Tool.readRawFile(this, R.raw.params);
+
         final Predictor.Device device = new Predictor.Device(Predictor.Device.Type.CPU, 0);
         //3 channel image on input
         final int[] shape = {1, 3, 224, 224};
@@ -58,10 +66,10 @@ public class RecognitionApp extends Application {
         final Predictor.InputNode node = new Predictor.InputNode(key, shape);
 
         predictor = new Predictor(symbol, params, device, new Predictor.InputNode[]{node});
-        dict = readRawTextFile(this, R.raw.synset);
+        dict = Tool.readRawTextFile(this, R.raw.synset);
         try {
             final StringBuilder sb = new StringBuilder();
-            final List<String> lines = readRawTextFile(this, R.raw.mean);
+            final List<String> lines = Tool.readRawTextFile(this, R.raw.mean);
             for (final String line : lines) {
                 sb.append(line);
             }
@@ -75,38 +83,9 @@ public class RecognitionApp extends Application {
         }
     }
 
-    public static byte[] readRawFile(Context ctx, int resId) {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        int size = 0;
-        byte[] buffer = new byte[1024];
-        try {
-            InputStream ins = ctx.getResources().openRawResource(resId);
-            while ((size = ins.read(buffer, 0, 1024)) >= 0) {
-                outputStream.write(buffer, 0, size);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return outputStream.toByteArray();
-    }
 
-    @Nullable
-    public static List<String> readRawTextFile(Context ctx, int resId) {
-        List<String> result = new ArrayList<>();
-        InputStream inputStream = ctx.getResources().openRawResource(resId);
-
-        InputStreamReader inputreader = new InputStreamReader(inputStream);
-        BufferedReader buffreader = new BufferedReader(inputreader);
-        String line;
-
-        try {
-            while ((line = buffreader.readLine()) != null) {
-                result.add(line);
-            }
-        } catch (IOException e) {
-            return null;
-        }
-        return result;
+    public static RecognitionApp getInstance() {
+        return instance;
     }
 
     @Override

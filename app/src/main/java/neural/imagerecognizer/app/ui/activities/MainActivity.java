@@ -42,12 +42,20 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.btnWhatis)
     public void whatisClick() {
-        btnWhatis.startAnimation();
 
+        if (paintView.isModePaint()) {
+            if (recognBitmap == null)
+                recognBitmap = paintView.getBitmap();
+        } else if (paintView.isModePhoto())
+            if (recognBitmap == null)
+                return;
+
+        btnWhatis.startAnimation();
         MxNetUtils.identifyImage(recognBitmap, new MxNetUtils.Callback() {
             @Override
             public void onResult(@NonNull String description) {
                 btnWhatis.endAnimation();
+                //set description....
             }
         });
 
@@ -81,7 +89,7 @@ public class MainActivity extends BaseActivity {
             }
 
             @Override
-            public void onFailGrant() {
+            public void onFail() {
                 Tool.showToast(MainActivity.this, "Please give camera permission!");
             }
 

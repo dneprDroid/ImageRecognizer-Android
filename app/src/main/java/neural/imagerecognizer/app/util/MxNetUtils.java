@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import neural.imagerecognizer.app.R;
 import neural.imagerecognizer.app.RecognitionApp;
 import org.dmlc.mxnet.Predictor;
 
@@ -57,6 +58,7 @@ public final class MxNetUtils {
             @Override
             public void onError(Exception e) {
                 Tool.log("error of img recogn. :  %s", e);
+                Tool.showToast(R.string.toast_recognition_error);
             }
         });
     }

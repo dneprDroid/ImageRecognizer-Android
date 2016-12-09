@@ -136,12 +136,20 @@ public class PaintView extends ImageView {
         return true;
     }
 
-    private boolean isModePhoto() {
+    public boolean isModePaint() {
+        return mode == Mode.PAINT;
+    }
+
+    public boolean isModePhoto() {
         return mode == Mode.PHOTO;
     }
 
     public Mode getMode() {
         return mode;
+    }
+
+    public Bitmap getBitmap() {
+        return mBitmap;
     }
 
     public enum Mode {
