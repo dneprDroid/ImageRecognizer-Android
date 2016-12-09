@@ -1,4 +1,4 @@
-package android.imagerecognizer.app.util;
+package neural.imagerecognizer.app.util;
 
 import android.Manifest;
 import android.app.Activity;

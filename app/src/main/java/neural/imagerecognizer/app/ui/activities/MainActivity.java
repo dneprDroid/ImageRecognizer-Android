@@ -1,21 +1,18 @@
-package android.imagerecognizer.app.ui.activities;
+package neural.imagerecognizer.app.ui.activities;
 
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.imagerecognizer.app.R;
-import android.imagerecognizer.app.ui.views.WhatisButton;
-import android.imagerecognizer.app.util.Tool;
+import neural.imagerecognizer.app.R;
+import neural.imagerecognizer.app.ui.views.WhatisButton;
+import neural.imagerecognizer.app.util.Tool;
 import android.net.Uri;
-import android.provider.SyncStateContract;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.desmond.squarecamera.CameraActivity;
 
@@ -25,7 +22,7 @@ import java.io.InputStream;
 public class MainActivity extends BaseActivity {
 
     @Bind(R.id.btnWhatis)
-    protected WhatisButton btnWhatis;
+    WhatisButton btnWhatis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +41,9 @@ public class MainActivity extends BaseActivity {
     public void selectFromGallery() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
-        startActivityForResult(photoPickerIntent, new Callback() {
+        startActivityForResult(photoPickerIntent, new CallbackResult() {
             @Override
-            public void onCallback(@NonNull Intent data) {
+            public void onResult(@NonNull Intent data) {
                 try {
                     Uri imageUri = data.getData();
                     InputStream imageStream = getContentResolver().openInputStream(imageUri);
@@ -66,9 +63,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onPermissionGranted() {
                 Intent startCustomCameraIntent = new Intent(MainActivity.this, CameraActivity.class);
-                startActivityForResult(startCustomCameraIntent, new Callback() {
+                startActivityForResult(startCustomCameraIntent, new CallbackResult() {
                     @Override
-                    public void onCallback(@NonNull Intent data) {
+                    public void onResult(@NonNull Intent data) {
                         Uri photoUri = data.getData();
                         Bitmap bitmap = BitmapFactory.decodeFile(photoUri.getPath());
                     }

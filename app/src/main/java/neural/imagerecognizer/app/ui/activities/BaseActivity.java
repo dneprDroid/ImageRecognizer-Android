@@ -1,8 +1,8 @@
-package android.imagerecognizer.app.ui.activities;
+package neural.imagerecognizer.app.ui.activities;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.imagerecognizer.app.util.Tool;
+import neural.imagerecognizer.app.util.Tool;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -17,7 +17,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 101;
 
-    private Callback callback;
+    private CallbackResult callback;
     private PermissionCallback permissionCallback;
 
     @Override
@@ -42,7 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         ButterKnife.unbind(this);
     }
 
-    public void startActivityForResult(Intent intent, Callback callback) {
+    public void startActivityForResult(Intent intent, CallbackResult callback) {
         this.callback = callback;
         super.startActivityForResult(intent, REQUEST_CODE);
     }
@@ -91,7 +91,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         boolean resultOk = resultCode == RESULT_OK && requestCode == REQUEST_CODE && callback != null && data != null;
         if (resultOk) {
-            callback.onCallback(data);
+            callback.onResult(data);
             callback = null;
         } else
             Tool.log("data nullable is %s", data == null);
@@ -106,7 +106,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         String getPermissionName();
     }
 
-    public interface Callback {
-        void onCallback(@NonNull Intent data);
+    public interface CallbackResult {
+        void onResult(@NonNull Intent data);
     }
 }

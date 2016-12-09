@@ -1,15 +1,20 @@
-package android.imagerecognizer.app.ui.views;
+package neural.imagerecognizer.app.ui.views;
 
 import android.animation.Animator;
+import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.util.AttributeSet;
 import android.widget.Button;
+import neural.imagerecognizer.app.R;
+import neural.imagerecognizer.app.util.Tool;
 
 public class WhatisButton extends Button {
-    private static final long ANIMATION_DURATION = 500;
+    private static final long ANIMATION_DURATION = 1000;
     private ValueAnimator animator;
 
     public WhatisButton(Context context) {
@@ -24,11 +29,14 @@ public class WhatisButton extends Button {
     }
 
     private void init() {
-        this.animator = ObjectAnimator.ofFloat(this, "background", Color.BLUE, Color.WHITE, Color.BLUE);
+        this.animator = ObjectAnimator.ofInt(this, "backgroundColor", Color.BLUE, Color.CYAN, Color.BLUE);
         animator.setDuration(ANIMATION_DURATION);
-        animator.setRepeatMode(ValueAnimator.INFINITE);
+        animator.setEvaluator(new ArgbEvaluator());
+        animator.setRepeatCount(ValueAnimator.INFINITE);
+        animator.setRepeatMode(ValueAnimator.REVERSE);
         setBackgroundColor(Color.BLUE);
         setTextColor(Color.WHITE);
+        setText(R.string.label_whatis);
     }
 
     public void startAnimation() {

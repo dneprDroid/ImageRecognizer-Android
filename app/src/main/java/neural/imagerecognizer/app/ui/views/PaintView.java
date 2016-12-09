@@ -1,13 +1,15 @@
-package android.imagerecognizer.app.ui.views;
+package neural.imagerecognizer.app.ui.views;
 
 import android.content.Context;
 import android.graphics.*;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 
-public class PaintView extends View {
+public class PaintView extends ImageView {
     public int width;
     public int height;
     private Bitmap mBitmap;
@@ -32,11 +34,11 @@ public class PaintView extends View {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setDither(true);
-        mPaint.setColor(Color.GREEN);
+        mPaint.setColor(Color.BLACK);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeJoin(Paint.Join.ROUND);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
-        mPaint.setStrokeWidth(12);
+        mPaint.setStrokeWidth(7);
 
 
         mPath = new Path();
@@ -100,7 +102,7 @@ public class PaintView extends View {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean onTouchEvent(@NonNull MotionEvent event) {
         float x = event.getX();
         float y = event.getY();
 

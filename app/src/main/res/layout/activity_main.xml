@@ -4,22 +4,11 @@
                 android:layout_height="match_parent"
                 tools:context=".MainActivity">
 
-    <FrameLayout
-            android:id="@+id/flImageBlock"
+
+    <neural.imagerecognizer.app.ui.views.PaintView
+            android:id="@+id/paintView"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_centerHorizontal="true"
-            android:layout_above="@+id/ivCamera"
-            android:layout_alignParentTop="true">
-
-        <android.imagerecognizer.app.ui.views.PaintView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-    </FrameLayout>
+            android:layout_height="match_parent"/>
 
     <ImageView
             android:id="@+id/ivCamera"
@@ -28,8 +17,8 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_small"
             android:layout_alignParentBottom="true"
-            android:layout_alignRight="@+id/flImageBlock"
-            android:layout_alignEnd="@+id/flImageBlock"/>
+            android:layout_alignRight="@+id/paintView"
+            android:layout_alignEnd="@+id/paintView"/>
 
     <ImageView
             android:id="@+id/ivGallery"
@@ -37,11 +26,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_small"
-            android:layout_below="@+id/flImageBlock"
+            android:layout_below="@+id/paintView"
             android:layout_toLeftOf="@+id/ivCamera"
             android:layout_toStartOf="@+id/ivCamera"/>
 
-    <android.imagerecognizer.app.ui.views.WhatisButton
+    <neural.imagerecognizer.app.ui.views.WhatisButton
             android:id="@+id/btnWhatis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
