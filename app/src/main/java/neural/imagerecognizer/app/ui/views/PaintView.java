@@ -9,8 +9,6 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 
 public class PaintView extends ImageView {
-    private int width;
-    private int height;
     private Bitmap mBitmap;
     private Canvas mCanvas;
     private Path mPath;
@@ -52,11 +50,14 @@ public class PaintView extends ImageView {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(@NonNull Canvas canvas) {
         super.onDraw(canvas);
+        if (isModePhoto())
+            return;
 
         canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
         canvas.drawPath(mPath, mPaint);
+
     }
 
     private float mX, mY;
@@ -113,7 +114,7 @@ public class PaintView extends ImageView {
 
     @Override
     public boolean onTouchEvent(@NonNull MotionEvent event) {
-        if (isModeImage())
+        if (isModePhoto())
             return true;
         float x = event.getX();
         float y = event.getY();
@@ -135,7 +136,7 @@ public class PaintView extends ImageView {
         return true;
     }
 
-    private boolean isModeImage() {
+    private boolean isModePhoto() {
         return mode == Mode.PHOTO;
     }
 

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.Nullable;
 import neural.imagerecognizer.app.R;
 import neural.imagerecognizer.app.ui.views.PaintView;
 import neural.imagerecognizer.app.ui.views.WhatisButton;
@@ -27,6 +28,9 @@ public class MainActivity extends BaseActivity {
 
     @Bind(R.id.paintView)
     PaintView paintView;
+
+    @Nullable
+    private Bitmap recognBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +91,7 @@ public class MainActivity extends BaseActivity {
             InputStream imageStream = getContentResolver().openInputStream(imageUri);
 
             Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
+            this.recognBitmap = bitmap;
             paintView.setPhoto(bitmap);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

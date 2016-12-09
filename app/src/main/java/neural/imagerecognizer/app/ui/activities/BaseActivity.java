@@ -90,11 +90,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         boolean resultOk = resultCode == RESULT_OK && requestCode == REQUEST_CODE && callback != null && data != null;
-        if (resultOk) {
+        if (resultOk)
             callback.onResult(data);
-            callback = null;
-        } else
+        else
             Tool.log("data nullable is %s", data == null);
+        callback = null;
     }
 
     public interface PermissionCallback {
