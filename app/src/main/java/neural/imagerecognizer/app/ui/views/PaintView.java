@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
+import neural.imagerecognizer.app.util.Tool;
 
 public class PaintView extends ImageView {
     private Bitmap mBitmap;
@@ -30,7 +31,7 @@ public class PaintView extends ImageView {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setDither(true);
-        mPaint.setColor(Color.BLACK);
+        mPaint.setColor(Color.BLUE);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeJoin(Paint.Join.ROUND);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -45,8 +46,7 @@ public class PaintView extends ImageView {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        mCanvas = new Canvas(mBitmap);
+        recreateBitmap(w, h);
     }
 
     @Override
@@ -54,7 +54,6 @@ public class PaintView extends ImageView {
         super.onDraw(canvas);
         if (isModePhoto())
             return;
-
         canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
         canvas.drawPath(mPath, mPaint);
 
@@ -146,8 +145,20 @@ public class PaintView extends ImageView {
         return mode;
     }
 
-    public Bitmap getBitmap() {
+    public Bitmap getPaintedBitmap() {
         return mBitmap;
+    }
+
+    public void clearBitmap() {
+        recreateBitmap(getWidth(), getHeight());
+        invalidate();
+        Tool.log("btmap size: %s, %s", mBitmap.getWidth(), mBitmap.getHeight());
+    }
+
+    private void recreateBitmap(int width, int height) {
+        mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        mCanvas = new Canvas(mBitmap);
+        //mCanvas.drawARGB(255, 255, 255, 255);
     }
 
     public enum Mode {

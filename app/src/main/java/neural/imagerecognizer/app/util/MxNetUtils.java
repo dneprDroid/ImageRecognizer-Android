@@ -68,7 +68,6 @@ public final class MxNetUtils {
     }
 
     private static Bitmap processBitmap(final Bitmap origin) {
-        //TODO: error handling
         final int originWidth = origin.getWidth();
         final int originHeight = origin.getHeight();
         int height = SHORTER_SIDE;

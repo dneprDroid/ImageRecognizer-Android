@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity {
     public void whatisClick() {
 
         if (paintView.isModePaint()) {
-            recognBitmap = paintView.getBitmap();
+            recognBitmap = paintView.getPaintedBitmap();
         } else if (paintView.isModePhoto())
             if (recognBitmap == null)
                 return;
@@ -60,6 +60,11 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+    }
+
+    @OnClick(R.id.ivErse)
+    public void erse() {
+        paintView.clearBitmap();
     }
 
     @OnClick(R.id.ivPencil)

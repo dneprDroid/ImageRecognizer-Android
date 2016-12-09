@@ -3,6 +3,7 @@ package neural.imagerecognizer.app.util;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.StringRes;
@@ -13,6 +14,7 @@ import neural.imagerecognizer.app.RecognitionApp;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public final class Tool {
 
@@ -54,6 +56,7 @@ public final class Tool {
     public static void runOnMainThread(Runnable runnable) {
         new Handler(Looper.getMainLooper()).post(runnable);
     }
+
     public static byte[] readRawFile(Context ctx, int resId) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         int size = 0;
@@ -86,5 +89,26 @@ public final class Tool {
             e.printStackTrace();
         }
         return result;
+    }
+
+    //Debug
+    public static void saveBitmap(Bitmap bitmap) {
+        File myDir = new File("/sdcard/saved_images");
+        myDir.mkdirs();
+        Random generator = new Random();
+        int n = 10000;
+        n = generator.nextInt(n);
+        String fname = String.format("Image-%s.jpg", n);
+        File file = new File(myDir, fname);
+        if (file.exists()) file.delete();
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            out.flush();
+            out.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

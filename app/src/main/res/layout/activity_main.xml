@@ -63,4 +63,16 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"/>
 
+
+    <ImageView
+            android:id="@+id/ivErse"
+            android:src="@drawable/ic_eraser_variant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/ivPencil"
+            android:layout_toStartOf="@+id/ivPencil"
+            android:layout_alignTop="@+id/ivPencil"/>
+
 </RelativeLayout>
