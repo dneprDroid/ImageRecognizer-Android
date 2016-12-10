@@ -35,7 +35,7 @@ public class PaintView extends ImageView {
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeJoin(Paint.Join.ROUND);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
-        mPaint.setStrokeWidth(7);
+        mPaint.setStrokeWidth(9);
 
 
         mPath = new Path();
@@ -92,7 +92,6 @@ public class PaintView extends ImageView {
 
 
     public void setModePaint() {
-        setImageBitmap(null);
         clearBitmap();
         mode = Mode.PAINT;
     }
@@ -150,6 +149,7 @@ public class PaintView extends ImageView {
     }
 
     public void clearBitmap() {
+        setImageBitmap(null);
         recreateBitmap(getWidth(), getHeight());
         invalidate();
         Tool.log("btmap size: %s, %s", mBitmap.getWidth(), mBitmap.getHeight());

@@ -63,8 +63,14 @@ public class MainActivity extends BaseActivity {
     }
 
     @OnClick(R.id.ivErse)
-    public void erse() {
+    public void clean() {
+
+        if (paintView.isModePhoto())
+            paintView.setModePaint();
+
         paintView.clearBitmap();
+        recognBitmap = null;
+        Tool.showToast(this, R.string.toast_cleared);
     }
 
     @OnClick(R.id.ivPencil)
