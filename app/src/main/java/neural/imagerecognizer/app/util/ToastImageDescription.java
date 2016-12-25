@@ -16,7 +16,7 @@ public class ToastImageDescription {
             @Override
             public void run() {
                 Toast toast = new Toast(context);
-                toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.setGravity(Gravity.TOP, 0, (int) (Tool.getToolbarHeight() * 1.5));
                 toast.setDuration(Toast.LENGTH_LONG);
                 TextView tv = (TextView) LayoutInflater.from(context).inflate(R.layout.toast_image_description, null);
                 tv.setText(message);

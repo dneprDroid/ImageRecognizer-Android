@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RawRes;
 import android.support.annotation.StringRes;
 import android.util.Log;
+import android.util.TypedValue;
 import android.widget.Toast;
 import neural.imagerecognizer.app.RecognitionApp;
 
@@ -128,5 +129,15 @@ public final class Tool {
 
         return String.format("https://play.google.com/store/apps/details?id=%s",
                 RecognitionApp.getInstance().getPackageName());
+    }
+
+    public static int getToolbarHeight() {
+        Context ctx = RecognitionApp.getInstance().getApplicationContext();
+        TypedValue tv = new TypedValue();
+        if (ctx.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            return TypedValue.complexToDimensionPixelSize(tv.data,
+                    ctx.getResources().getDisplayMetrics());
+        }
+        return 0;
     }
 }

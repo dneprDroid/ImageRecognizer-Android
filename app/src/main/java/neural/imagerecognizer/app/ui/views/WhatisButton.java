@@ -36,19 +36,8 @@ public class WhatisButton extends Button {
         animatorBackground.setRepeatCount(ValueAnimator.INFINITE);
         animatorBackground.setRepeatMode(ValueAnimator.REVERSE);
 
-        ObjectAnimator scaleDownX = ObjectAnimator.ofInt(this, "scaleX", 1, 2, 1);
-        ObjectAnimator scaleDownY = ObjectAnimator.ofInt(this, "scaleY", 1, 2, 1);
-
-        scaleDownX.setDuration(ANIMATION_DURATION);
-        scaleDownX.setRepeatCount(ValueAnimator.INFINITE);
-        scaleDownX.setRepeatMode(ValueAnimator.REVERSE);
-
-        scaleDownY.setDuration(ANIMATION_DURATION);
-        scaleDownY.setRepeatCount(ValueAnimator.INFINITE);
-        scaleDownY.setRepeatMode(ValueAnimator.REVERSE);
-
         this.animator = new AnimatorSet();
-        animator.playTogether(animatorBackground, scaleDownX, scaleDownY);
+        animator.playTogether(animatorBackground);//, scaleDownX, scaleDownY);
 
     }
 
