@@ -6,9 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.Nullable;
 import neural.imagerecognizer.app.R;
+import neural.imagerecognizer.app.nn.NNManager;
 import neural.imagerecognizer.app.ui.views.PaintView;
 import neural.imagerecognizer.app.ui.views.WhatisButton;
-import neural.imagerecognizer.app.nn.MxNetUtils;
 import neural.imagerecognizer.app.util.ToastImageDescription;
 import neural.imagerecognizer.app.util.Tool;
 import android.net.Uri;
@@ -51,7 +51,7 @@ public class MainActivity extends BaseActivity {
                 return;
 
         btnWhatis.startAnimation();
-        MxNetUtils.identifyImage(recognBitmap, new MxNetUtils.Callback() {
+        NNManager.shared().identifyImage(recognBitmap, new NNManager.Callback() {
             @Override
             public void onResult(@NonNull String description) {
                 btnWhatis.endAnimation();

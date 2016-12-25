@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.RawRes;
 import android.support.annotation.StringRes;
 import android.util.Log;
 import android.widget.Toast;
@@ -59,12 +61,12 @@ public final class Tool {
         new Handler(Looper.getMainLooper()).post(runnable);
     }
 
-    public static byte[] readRawFile(Context ctx, int resId) {
+    public static byte[] readRawFile(@RawRes int resId) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         int size = 0;
         byte[] buffer = new byte[1024];
         try {
-            InputStream ins = ctx.getResources().openRawResource(resId);
+            InputStream ins = RecognitionApp.getInstance().getApplicationContext().getResources().openRawResource(resId);
             while ((size = ins.read(buffer, 0, 1024)) >= 0) {
                 outputStream.write(buffer, 0, size);
             }
@@ -75,9 +77,9 @@ public final class Tool {
     }
 
 
-    public static List<String> readRawTextFile(Context ctx, int resId) {
+    public static List<String> readRawTextFile(@RawRes int resId) {
         List<String> result = new ArrayList<>();
-        InputStream inputStream = ctx.getResources().openRawResource(resId);
+        InputStream inputStream = RecognitionApp.getInstance().getApplicationContext().getResources().openRawResource(resId);
 
         InputStreamReader inputreader = new InputStreamReader(inputStream);
         BufferedReader buffreader = new BufferedReader(inputreader);
