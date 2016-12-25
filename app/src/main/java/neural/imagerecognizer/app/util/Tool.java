@@ -78,7 +78,25 @@ public final class Tool {
     }
 
 
-    public static List<String> readRawTextFile(@RawRes int resId) {
+    public static String readRawTextFile(@RawRes int resId) {
+        StringBuilder result = new StringBuilder();
+        InputStream inputStream = RecognitionApp.getInstance().getApplicationContext().getResources().openRawResource(resId);
+
+        InputStreamReader inputreader = new InputStreamReader(inputStream);
+        BufferedReader buffreader = new BufferedReader(inputreader);
+        String line;
+
+        try {
+            while ((line = buffreader.readLine()) != null) {
+                result.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result.toString();
+    }
+
+    public static List<String> readRawTextFileAsList(@RawRes int resId) {
         List<String> result = new ArrayList<>();
         InputStream inputStream = RecognitionApp.getInstance().getApplicationContext().getResources().openRawResource(resId);
 

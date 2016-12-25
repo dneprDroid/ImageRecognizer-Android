@@ -53,14 +53,10 @@ public final class NNManager {
         final Predictor.InputNode node = new Predictor.InputNode(key, shape);
 
         predictor = new Predictor(symbol, params, device, new Predictor.InputNode[]{node});
-        dict = Tool.readRawTextFile(R.raw.synset);
+        dict = Tool.readRawTextFileAsList(R.raw.synset);
         try {
-            final StringBuilder sb = new StringBuilder();
-            final List<String> lines = Tool.readRawTextFile(R.raw.mean);
-            for (final String line : lines) {
-                sb.append(line);
-            }
-            final JSONObject meanJson = new JSONObject(sb.toString());
+            final String meanStr = Tool.readRawTextFile(R.raw.mean);
+            final JSONObject meanJson = new JSONObject(meanStr);
             mean = new HashMap<>();
             mean.put("b", (float) meanJson.optDouble("b"));
             mean.put("g", (float) meanJson.optDouble("g"));
