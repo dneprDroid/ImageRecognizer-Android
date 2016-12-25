@@ -1,4 +1,4 @@
-package neural.imagerecognizer.app.util;
+package neural.imagerecognizer.app.nn;
 
 import android.graphics.Bitmap;
 
@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import neural.imagerecognizer.app.R;
 import neural.imagerecognizer.app.RecognitionApp;
+import neural.imagerecognizer.app.util.ThreadManager;
+import neural.imagerecognizer.app.util.Tool;
 import org.dmlc.mxnet.Predictor;
 
 import java.nio.ByteBuffer;

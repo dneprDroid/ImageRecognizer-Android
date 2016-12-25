@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 import neural.imagerecognizer.app.R;
 import neural.imagerecognizer.app.ui.views.PaintView;
 import neural.imagerecognizer.app.ui.views.WhatisButton;
-import neural.imagerecognizer.app.util.MxNetUtils;
+import neural.imagerecognizer.app.nn.MxNetUtils;
 import neural.imagerecognizer.app.util.ToastImageDescription;
 import neural.imagerecognizer.app.util.Tool;
 import android.net.Uri;
