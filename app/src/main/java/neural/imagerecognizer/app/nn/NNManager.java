@@ -82,9 +82,9 @@ public final class NNManager {
                 float mean_r = getMean().get("r");
                 for (int i = 0; i < bytes.length; i += 4) {
                     int j = i / 4;
-                    colors[0 * DESIRED_SIDE * DESIRED_SIDE + j] = (float) (((int) (bytes[i + 0])) & 0xFF) - mean_r;
-                    colors[1 * DESIRED_SIDE * DESIRED_SIDE + j] = (float) (((int) (bytes[i + 1])) & 0xFF) - mean_g;
-                    colors[2 * DESIRED_SIDE * DESIRED_SIDE + j] = (float) (((int) (bytes[i + 2])) & 0xFF) - mean_b;
+                    colors[0 * DESIRED_SIDE * DESIRED_SIDE + j] = (float) (((int) (bytes[i + 0])) & 0xFF) - mean_r;//red
+                    colors[1 * DESIRED_SIDE * DESIRED_SIDE + j] = (float) (((int) (bytes[i + 1])) & 0xFF) - mean_g;//green
+                    colors[2 * DESIRED_SIDE * DESIRED_SIDE + j] = (float) (((int) (bytes[i + 2])) & 0xFF) - mean_b;//blue
                 }
                 Predictor predictor = getPredictor();
                 predictor.forward("data", colors);
