@@ -1,11 +1,13 @@
 # ImageRecognizer-Android
 Image classification using neural networks (inception-bn) and MxNet (neuralnet library), implemented for Android.
 #
-res/raw/params - serialized data of the network (weights, convolutional kernels)
+*res/raw/params* - serialized data of the network (weights, convolutional kernels)
 
-res/raw/symbol.json - structure of network 
+*res/raw/symbol.json* - structure of network 
 
-res/raw/syncet.txt - word dictionary for network, pair value - words
+*res/raw/syncet.txt* - word dictionary for network, pair value - words
+#
+Build **libmxnet_predict.so** from official mxnet sources - https://github.com/dmlc/mxnet
 #iOS
 iOS version -  https://github.com/dneprDroid/ImageRecognizer-iOS
 
