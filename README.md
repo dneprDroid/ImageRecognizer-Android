@@ -5,7 +5,7 @@ Image classification using neural networks (inception-bn) and MxNet (neuralnet l
 
 *res/raw/symbol.json* - structure of the network 
 
-*res/raw/syncet.txt* - word dictionary for network, pair value - words
+*res/raw/syncet.txt* - word dictionary for network, pair output value - word meaning
 #NDK library
 Build **libmxnet_predict.so** from official mxnet sources - https://github.com/dmlc/mxnet
 #iOS
