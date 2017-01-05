@@ -1,5 +1,5 @@
 # ImageRecognizer-Android
-Image classification using neural networks (inception-bn) and MxNet (neuralnet library), implemented for Android.
+Image classification using neural networks (inception-bn) and MxNet (neural net library), implemented for Android.
 #
 *res/raw/params* - serialized data of the network (weights, convolutional kernels)
 
@@ -7,7 +7,7 @@ Image classification using neural networks (inception-bn) and MxNet (neuralnet l
 
 *res/raw/syncet.txt* - word dictionary for network, pair output value - meaning word 
 #NDK library
-Build **libmxnet_predict.so** from official mxnet sources - https://github.com/dmlc/mxnet
+Build **libmxnet_predict.so** from official mxnet sources - https://github.com/dmlc/mxnet/tree/master/amalgamation
 #iOS
 iOS version -  https://github.com/dneprDroid/ImageRecognizer-iOS
 
