@@ -14,4 +14,5 @@ iOS version -  https://github.com/dneprDroid/ImageRecognizer-iOS
 #Links
   * https://github.com/dmlc/mxnet - MxNet library 
   * https://culurciello.github.io/tech/2016/06/04/nets.html - architectures of neural nets, including inception-bn arch.
+  * https://github.com/Trangle/mxnet-inception-v4 - inceprion network trainer
 
