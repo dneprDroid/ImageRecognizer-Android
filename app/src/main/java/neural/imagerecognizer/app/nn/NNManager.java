@@ -26,9 +26,6 @@ public final class NNManager {
     private Map<String, Float> mean;
 
     private Predictor predictor;
-
-    private static final int SHORTER_SIDE = 256;
-    private static final int DESIRED_SIDE = 224;
     private static NNManager shared;
 
     private NNManager() {
@@ -71,22 +68,7 @@ public final class NNManager {
             @Nullable
             @Override
             public String onExecute() throws Exception {
-                Bitmap processedBitmap = processBitmap(bitmap);
-                ByteBuffer byteBuffer = ByteBuffer.allocate(processedBitmap.getByteCount());
-                processedBitmap.copyPixelsToBuffer(byteBuffer);
-                byte[] bytes = byteBuffer.array();
-                float[] colors = new float[bytes.length / 4 * 3];
-
-                float mean_b = getMean().get("b");
-                float mean_g = getMean().get("g");
-                float mean_r = getMean().get("r");
-                for (int i = 0; i < bytes.length; i += 4) {
-                    int j = i / 4;
-                    colors[0 * DESIRED_SIDE * DESIRED_SIDE + j] = (float) (((int) (bytes[i + 0])) & 0xFF) - mean_r;//red
-                    colors[1 * DESIRED_SIDE * DESIRED_SIDE + j] = (float) (((int) (bytes[i + 1])) & 0xFF) - mean_g;//green
-                    colors[2 * DESIRED_SIDE * DESIRED_SIDE + j] = (float) (((int) (bytes[i + 2])) & 0xFF) - mean_b;//blue
-                }
-                Predictor predictor = getPredictor();
+                float[] colors = TensorMaker.convertBitmapToTensor(bitmap, mean);
                 predictor.forward("data", colors);
                 final float[] result = predictor.getOutput(0);
 
@@ -118,37 +100,12 @@ public final class NNManager {
         shared();
     }
 
-    private Bitmap processBitmap(final Bitmap origin) {
-        final int originWidth = origin.getWidth();
-        final int originHeight = origin.getHeight();
-        int height = SHORTER_SIDE;
-        int width = SHORTER_SIDE;
-        if (originWidth < originHeight) {
-            height = (int) ((float) originHeight / originWidth * width);
-        } else {
-            width = (int) ((float) originWidth / originHeight * height);
-        }
-        final Bitmap scaled = Bitmap.createScaledBitmap(origin, width, height, false);
-        int y = (height - DESIRED_SIDE) / 2;
-        int x = (width - DESIRED_SIDE) / 2;
-        return Bitmap.createBitmap(scaled, x, y, DESIRED_SIDE, DESIRED_SIDE);
-
-    }
-
 
     private String getName(int i) {
         if (i >= dict.size()) {
             return RecognitionApp.getInstance().getString(R.string.text_image_not_recognized);
         }
         return dict.get(i);
-    }
-
-    private Predictor getPredictor() {
-        return predictor;
-    }
-
-    private Map<String, Float> getMean() {
-        return mean;
     }
 
     public interface Callback {
