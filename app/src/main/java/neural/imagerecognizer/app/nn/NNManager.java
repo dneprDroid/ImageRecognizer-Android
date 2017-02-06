@@ -14,10 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public final class NNManager {
 
@@ -68,15 +65,15 @@ public final class NNManager {
             @Nullable
             @Override
             public String onExecute() throws Exception {
-                float[] colors = TensorMaker.convertBitmapToTensor(bitmap, mean);
-                predictor.forward("data", colors);
+                float[] imageTensor = TensorMaker.convertBitmapToTensor(bitmap, mean);
+                predictor.forward("data", imageTensor);
                 final float[] result = predictor.getOutput(0);
 
                 int index = 0;
-                for (int i = 0; i < result.length; ++i) {
+                for (int i = 0; i < result.length; i++) {
                     if (result[index] < result[i]) index = i;
                 }
-                Arrays.sort(result);
+                //Arrays.sort(result);
                 String tag = getName(index);
                 Tool.log("recognition competed: %s", tag);
                 String[] arr = tag.split(" ", 2);
