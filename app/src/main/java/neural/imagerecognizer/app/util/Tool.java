@@ -7,10 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.RawRes;
-import android.support.annotation.StringRes;
+import android.support.annotation.*;
 import android.util.Log;
 import android.util.TypedValue;
 import android.widget.Toast;
@@ -115,24 +112,28 @@ public final class Tool {
     }
 
     //Debug
-    public static void saveBitmap(Bitmap bitmap) {
-        File myDir = new File("/sdcard/saved_images");
-        myDir.mkdirs();
-        Random generator = new Random();
-        int n = 10000;
-        n = generator.nextInt(n);
-        String fname = String.format("Image-%s.jpg", n);
-        File file = new File(myDir, fname);
-        if (file.exists()) file.delete();
-        try {
-            FileOutputStream out = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
-            out.flush();
-            out.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public static void saveBitmap(final Bitmap bitmap) {
+        RecognitionApp.tm.execute(new Runnable() {
+            @Override
+            public void run() {
+                File myDir = new File("/sdcard/saved_images");
+                myDir.mkdirs();
+                Random generator = new Random();
+                int n = 10000;
+                n = generator.nextInt(n);
+                String fname = String.format("Image-%s.jpg", n);
+                File file = new File(myDir, fname);
+                if (file.exists()) file.delete();
+                try {
+                    FileOutputStream out = new FileOutputStream(file);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                    out.flush();
+                    out.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     public static void shareText(Context context, @NonNull String str) {
