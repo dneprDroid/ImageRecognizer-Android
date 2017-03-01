@@ -1,7 +1,7 @@
 # ImageRecognizer-Android
 Image classification using neural networks (inception-bn) and [**MxNet**](https://github.com/dmlc/mxnet) (neural net library), implemented for Android.
 #
-[*nn/NNManager.java*](https://github.com/dneprDroid/ImageRecognizer/blob/master/app/src/main/java/neural/imagerecognizer/app/nn/NNManager.java) - class working with **MxNet library**
+[*nn/NNManager.java*](https://github.com/dneprDroid/ImageRecognizer/blob/master/app/src/main/java/neural/imagerecognizer/app/nn/NNManager.java) - class working with **MxNet**
 
 Pre-trained model:
 
