@@ -15,7 +15,7 @@ public final class TensorMaker {
     private TensorMaker() {
     }
 
-    // todo: implement this in RenderScript
+    // todo: implement this via RenderScript
     public static float[] convertBitmapToTensor(Bitmap bitmap, Map<String, Float> mean) {
         Bitmap processedBitmap = processBitmap(bitmap);
         ByteBuffer byteBuffer = ByteBuffer.allocate(processedBitmap.getByteCount());
@@ -28,9 +28,9 @@ public final class TensorMaker {
         float mean_r = mean.get("r");
         for (int i = 0; i < bytes.length; i += 4) {
             int j = i / 4;
-            colors[0 * DESIRED_SIDE * DESIRED_SIDE + j] = (float) (((int) (bytes[i + 0])) & 0xFF) - mean_r; // red
-            colors[1 * DESIRED_SIDE * DESIRED_SIDE + j] = (float) (((int) (bytes[i + 1])) & 0xFF) - mean_g; // green
-            colors[2 * DESIRED_SIDE * DESIRED_SIDE + j] = (float) (((int) (bytes[i + 2])) & 0xFF) - mean_b; // blue
+            colors[0 * DESIRED_SIDE * DESIRED_SIDE + j] = (bytes[i + 0] & 0xFF) - mean_r; // red
+            colors[1 * DESIRED_SIDE * DESIRED_SIDE + j] = (bytes[i + 1] & 0xFF) - mean_g; // green
+            colors[2 * DESIRED_SIDE * DESIRED_SIDE + j] = (bytes[i + 2] & 0xFF) - mean_b; // blue
         }
         return colors;
     }

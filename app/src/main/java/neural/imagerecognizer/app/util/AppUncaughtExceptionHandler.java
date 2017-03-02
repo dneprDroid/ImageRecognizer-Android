@@ -18,9 +18,7 @@ public class AppUncaughtExceptionHandler implements Thread.UncaughtExceptionHand
     public void uncaughtException(Thread thread, Throwable ex) {
         Tool.log("Exception: " + ex);
 
-        Class<? extends BaseActivity> activityClass = MainActivity.class;
-
-        Intent intent = new Intent(context, activityClass);
+        Intent intent = new Intent(context, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 

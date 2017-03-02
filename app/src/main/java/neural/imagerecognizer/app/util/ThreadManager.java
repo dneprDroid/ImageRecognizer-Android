@@ -17,7 +17,7 @@ public class ThreadManager {
         pool = Executors.newCachedThreadPool();
     }
 
-    public static ThreadManager getInstance() {
+    public static synchronized ThreadManager getInstance() {
         if (instance == null) instance = new ThreadManager();
         return instance;
     }
