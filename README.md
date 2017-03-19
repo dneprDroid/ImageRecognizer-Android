@@ -13,12 +13,12 @@ Pre-trained model:
  
 #
 <image src=https://raw.githubusercontent.com/dneprDroid/ImageRecognizer/master/images/Screenshot1.png height=500 />
-#NDK library
+# NDK library
 Build **libmxnet_predict.so** from official mxnet sources - https://github.com/dmlc/mxnet/tree/master/amalgamation
-#iOS
+# iOS
 iOS version -  https://github.com/dneprDroid/ImageRecognizer-iOS
 
-#Links
+# Links
   * https://github.com/dmlc/mxnet - MxNet library 
   * https://culurciello.github.io/tech/2016/06/04/nets.html - architectures of neural nets, including inception-bn arch.
   * https://github.com/Trangle/mxnet-inception-v4 - inceprion network trainer
