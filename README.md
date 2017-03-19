@@ -13,8 +13,10 @@ Pre-trained model:
  
 #
 <image src=https://raw.githubusercontent.com/dneprDroid/ImageRecognizer/master/images/Screenshot1.png height=500 />
+
 # NDK library
 Build **libmxnet_predict.so** from official mxnet sources - https://github.com/dmlc/mxnet/tree/master/amalgamation
+
 # iOS
 iOS version -  https://github.com/dneprDroid/ImageRecognizer-iOS
 
