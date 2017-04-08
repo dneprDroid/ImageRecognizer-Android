@@ -3,6 +3,8 @@ Image classification using neural networks (inception-bn) and [**MxNet**](https:
 #
 nn/[*NNManager.java*](https://github.com/dneprDroid/ImageRecognizer/blob/master/app/src/main/java/neural/imagerecognizer/app/nn/NNManager.java) - class working with **MxNet**
 
+nn/[TensorMaker.java](https://github.com/dneprDroid/ImageRecognizer-Android/blob/master/app/src/main/java/neural/imagerecognizer/app/nn/TensorMaker.java)  - tensor convertor 
+
 Pre-trained model:
 
 *res/raw/params* - serialized data of the network (weights, convolutional kernels)
